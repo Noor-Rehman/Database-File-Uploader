@@ -6,6 +6,7 @@ import sqlalchemy as sa
 import pandas as pd
 import io
 import base64
+import os
 
 # Note: User needs to install required packages:
 # pip install dash dash-bootstrap-components sqlalchemy pandas
@@ -250,4 +251,5 @@ def upload_file(n_clicks, db_type, host, port, username, password, db_name, cont
         return f"Upload failed: {str(e)}", "danger", True
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 8050))  # Default to 8050 if PORT is not set
+    app.run(host="0.0.0.0", port=port, debug=False)
